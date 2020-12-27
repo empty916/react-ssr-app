@@ -2,6 +2,7 @@ import Head from "next/head";
 import Layout, { siteTitle } from "../components/layout";
 import store, { inject, S } from "../store";
 import utilStyles from "../styles/utils.module.css";
+import { getServerSidePropsArg } from "../utils";
 
 const injector = inject("app");
 
@@ -27,7 +28,7 @@ function Home({ app }: typeof injector.type) {
 
 export default injector(Home);
 
-export const getServerSideProps = async ({ req }: { req: { store: S } }) => {
-	await req.store.dispatch("app", "fetch", "wangxiaogang");
+export const getServerSideProps = async ({ req, query }: getServerSidePropsArg) => {
+	await req.store.dispatch("app", "fetch", query.user, Number(query.time));
 	return { props: req.store.getAllStates() };
 };

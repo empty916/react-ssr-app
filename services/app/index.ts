@@ -7,7 +7,8 @@ class AppService extends BaseService {
     start() {
         this.watch('app', ({actionName, state}) => {
             if (actionName === 'fetch' && this.times === 0 && state) {
-                this.dispatch('app', 'fetch', state.name + '23333');
+                this.times++;
+                this.dispatch('app', 'fetch', state.name + '23333', 100);
             }
         })
     }

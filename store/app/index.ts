@@ -4,10 +4,10 @@ const state = {
 }
 
 const actions = {
-    fetch: async (name: string = '1111', ctx?: any) => {
+    fetch: async (name: string = 'empty916', time: number = 100, ctx?: any) => {
         await new Promise<void>(res => setTimeout(() => {
             res();
-        }, 100));
+        }, time));
         // console.log(ctx.http);
         return {name};
     }
