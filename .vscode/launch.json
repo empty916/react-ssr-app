@@ -1,0 +1,55 @@
+{
+    // 使用 IntelliSense 了解相关属性。
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+		{
+			"name": "Chrome",
+			"type": "chrome",
+			"request": "launch",
+			"url": "http://localhost:8080",
+			"webRoot": "${workspaceFolder}",
+			"sourceMaps":true,
+			// "sourceMapPathOverrides": {
+			//   "webpack:///src/*": "${webRoot}/*"
+			// }
+		},
+        {
+			"type": "node",
+			"request": "launch",
+			"name": "auto-get-module",
+			"program": "${workspaceFolder}/scripts/auto-get-module/index.js"
+		},
+		{
+			"type": "node",
+			"request": "launch",
+			"name": "npm run dev",
+			"runtimeExecutable": "npm",
+			"runtimeArgs": [
+				"run-script",
+				"dev"
+			],
+			"port": 8080
+		},
+
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "build",
+            "program": "${workspaceFolder}/scripts/build.js"
+        },
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "build_dll",
+            "program": "${workspaceFolder}/scripts/build_dll.js"
+		},
+		{
+            "type": "node",
+            "request": "launch",
+            "name": "create page",
+            "program": "${workspaceFolder}/scripts/create-module/index.js"
+        },
+    ]
+}

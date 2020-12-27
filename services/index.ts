@@ -1,0 +1,1 @@
+export { appService } from './app'
