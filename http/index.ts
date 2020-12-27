@@ -3,10 +3,10 @@ import axios from 'axios';
 
 
 
-const http = axios.create({
+export const createHttp = () => axios.create({
     timeout: 30000,
     baseURL: '',
 });
 
 
-export default http;
+export default createHttp();

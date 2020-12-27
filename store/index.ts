@@ -9,9 +9,9 @@ import {
 import { localStorageMiddleware, getData, clearData } from './plugins/persist';
 import app from './app';
 import { createPromiseWatcherMiddleware } from 'natur-promise-watcher';
-import axios from 'axios';
 import { isBrowser, isPromise } from '../utils';
 import { services } from '../utils/collect-class';
+import { createHttp } from '../http';
 
 
 const modules = {
@@ -24,9 +24,7 @@ export type LM = {};
 
 
 export const initStore = (data: any = {}) => {
-    const http = axios.create({
-        timeout: 30000,
-    });
+    const http = createHttp();
 
     const {
         collectPromiseMiddleware,
