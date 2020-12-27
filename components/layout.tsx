@@ -33,7 +33,7 @@ export default function Layout({ children, home = false }) {
         {home ? (
           <>
             <img
-              src="/images/profile.jpg"
+              src="http://localhost:3000/images/profile.jpg"
               className={`${styles.headerHomeImage} ${utilStyles.borderCircle}`}
               alt={name}
             />

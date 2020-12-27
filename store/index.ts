@@ -8,6 +8,7 @@ import {
 } from 'natur/dist/middlewares';
 import { localStorageMiddleware, getData, clearData } from './plugins/persist';
 import app from './app';
+import * as page2 from './page2/store';
 import { createPromiseWatcherMiddleware } from 'natur-promise-watcher';
 import { isBrowser, isPromise } from '../utils';
 import { services } from '../utils/collect-class';
@@ -15,7 +16,8 @@ import { createHttp } from '../http';
 
 
 const modules = {
-	app,
+    app,
+    page2,
 };
 
 export type M = typeof modules;
@@ -66,7 +68,11 @@ export const initStore = (data: any = {}) => {
             fillObjectRestDataMiddleware,
             shallowEqualMiddleware,
             filterUndefinedMiddleware,
-            isBrowser ? localStorageMiddleware : null
+            isBrowser ? localStorageMiddleware : null,
+            () => next => record => {
+                console.log(record.moduleName, record.actionName, record.state);
+                return next(record);
+            }
         ].filter(Boolean),
     });
     
@@ -81,6 +87,8 @@ export type StoreType = typeof store.type;
 const initServerData = (global as any)?.__NEXT_DATA__?.props?.pageProps || {};
 
 const lsData = isBrowser ? (getData() || {}) : {};
+
+console.log(lsData)
 
 const store = initStore({
     ...lsData,
