@@ -10,7 +10,7 @@ import { localStorageMiddleware, getData, clearData } from './plugins/persist';
 import app from './app';
 import * as page2 from './page2/store';
 import { createPromiseWatcherMiddleware } from 'natur-promise-watcher';
-import { isBrowser, isPromise } from '../utils';
+import { isBrowser, isPromise } from '@/utils';
 import { services } from '../utils/collect-class';
 import { createHttp } from '../http';
 

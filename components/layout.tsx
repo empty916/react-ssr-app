@@ -3,7 +3,7 @@ import styles from './layout.module.css'
 import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 
-const name = '微言'
+const name = '121'
 export const siteTitle = 'Next.js Sample Website'
 
 type LayoutProps = {

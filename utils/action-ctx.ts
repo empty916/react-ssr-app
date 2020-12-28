@@ -1,5 +1,5 @@
-import { createHttp } from "../http";
+import { createHttp } from "@/http";
 
 export type Ctx = {
-    http: ReturnType<typeof createHttp>
+    http: ReturnType<typeof createHttp>;
 }

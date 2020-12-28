@@ -1,34 +1,75 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# react服务端渲染模板
 
-## Getting Started
+**基于typescript, nextjs, natur, antd搭建的项目模板**
 
-First, run the development server:
+## 项目启动与打包部署
 
-```bash
-npm run dev
-# or
+```js
+// 安装依赖
+yarn
+// 运行
 yarn dev
+// 打包
+yarn build
+// 部署，启动node服务， 建议通过pm2启动
+yarn start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 目录结构
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- .next next自动生成，不用管
+- components 存放组件
+- http 请求后台接口，客户端的请求和服务端的请求服务都是动态生成的
+- pages 页面
+- public 存放静态资源
+- services 存放store的调度逻辑
+- store 存放模块的业务逻辑
+    - plugins 存放natur的插件配置
+- styles 存放全局公共的样式
+- theme 存放antd的自定义主题配置
+    - antd-theme.var.less 存放antd的主题覆盖
+    - antd.css 是通过```npm run gt```自动生成的，不用管
+- utils 存放工具函数
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## 别名
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- @ 对应根目录
 
-## Learn More
+## antd主题配置
 
-To learn more about Next.js, take a look at the following resources:
+1. 修改./theme/antd-theme-var.less文件，添加你需要修改的主题色
+2. 运行命令```yarn gt```，完成主题修改(此命令会自动生成一份antd.css并覆盖node_modules/antd下的css文件)
+3. 不支持热更新
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## 关于接口请求
 
-## Deploy on Vercel
+1. 接口请求使用axios动态生成，代码存放在./http中，在ssr服务端，如果存在用户态，则需要将用户的登录态传给业务后端，所以使用axios动态生成一个实例，再将该实例通过natur interceptor注入到每一个action的最后一个参数，所以接口请求需要获取到action的最后一个参数中的http进行请求
+    ```ts
+    import { Ctx } from "@/utils/action-ctx";
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    const actions = {
+        // ctx会是最后一个参数，必须标记为可选，否则ts会校验必传，实际上他是自动注入的
+        fetch: async (params: string, ctx?: Ctx) => {
+            // ctx.http.post post request
+            // ctx.http.get get request
+            /* business code */
+        }
+    }
+    ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 其他
+
+- 判断当前是服务器还是浏览器
+    ```ts
+    import { isBrowser } from '@/utils';
+
+    if (isBrowser) {
+        // 是浏览器环境
+    } else {
+        // 是服务端环境
+    }
+
+    ```
+
+- 关于路由，或者其他详情请看[nextjs中文文档](https://www.nextjs.cn/docs)

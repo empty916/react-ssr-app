@@ -5,47 +5,32 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "gt": "generate-theme './theme/antd-theme-var.less' './theme/antd.css' && cp ./theme/antd.css ./node_modules/antd/dist/",
+    "postinstall": "npm run gt"
   },
   "dependencies": {
-    "@date-io/date-fns": "1.x",
-    "@loadable/component": "^5.10.1",
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/icons": "^4.9.1",
-    "@material-ui/lab": "^4.0.0-alpha.49",
-    "@material-ui/pickers": "^3.2.10",
+    "antd": "^4.9.4",
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
-    "date-fns": "^2.16.1",
     "dayjs": "^1.8.19",
-    "formik": "2.1.4",
-    "formik-material-ui": "^2.0.1",
-    "formik-material-ui-lab": "^0.0.4",
-    "formik-material-ui-pickers": "^0.0.10",
-    "jss": "^10.4.0",
-    "jss-plugin-default-unit": "^10.4.0",
     "natur": "^2.1.1-beta2",
     "natur-persist": "^1.2.2",
     "natur-promise-watcher": "^1.0.1",
     "natur-service": "^2.1.2",
     "next": "10.0.4",
-    "postcss": "^8.2.1",
     "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "styled-jsx": "^3.3.2"
+    "react-dom": "17.0.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@babel/plugin-proposal-decorators": "^7.12.12",
+    "@emeks/antd-custom-theme-generator": "^0.1.6",
     "@types/node": "^14.14.16",
     "@types/react": "^17.0.0",
     "eslint": "^7.16.0",
-    "node-sass": "^5.0.0",
-    "postcss-flexbugs-fixes": "^5.0.2",
-    "postcss-preset-env": "^6.7.0",
-    "styled-jsx-plugin-postcss": "^4.0.0",
-    "styled-jsx-plugin-sass": "^1.0.0",
-    "tailwindcss": "^2.0.2",
+    "less": "^4.0.0",
+    "sass": "^1.30.0",
     "typescript": "^4.1.3"
   }
 }

@@ -1,4 +1,4 @@
-import { Ctx } from "../../utils/action-ctx";
+import { Ctx } from "@/utils/action-ctx";
 
 const state = {
     name: '',
@@ -9,7 +9,6 @@ const actions = {
         await new Promise<void>(res => setTimeout(() => {
             res();
         }, time));
-        // console.log(ctx.http);
         return {name};
     }
 }
