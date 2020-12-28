@@ -13,6 +13,8 @@ yarn dev
 yarn build
 // 部署，启动node服务， 建议通过pm2启动
 yarn start
+
+// 打开网页http://localhost:3000/
 ```
 
 ## 目录结构
@@ -38,8 +40,6 @@ yarn start
 ## antd主题配置
 
 1. 修改./theme/antd-theme-var.less文件，添加你需要修改的主题色
-2. 运行命令```yarn gt```，完成主题修改(此命令会自动生成一份antd.css并覆盖node_modules/antd下的css文件)
-3. 不支持热更新
 
 
 ## 关于接口请求

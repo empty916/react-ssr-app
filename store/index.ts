@@ -88,8 +88,6 @@ const initServerData = (global as any)?.__NEXT_DATA__?.props?.pageProps || {};
 
 const lsData = isBrowser ? (getData() || {}) : {};
 
-console.log(lsData)
-
 const store = initStore({
     ...lsData,
     ...initServerData,

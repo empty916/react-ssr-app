@@ -5,9 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
-    "gt": "generate-theme './theme/antd-theme-var.less' './theme/antd.css' && cp ./theme/antd.css ./node_modules/antd/dist/",
-    "postinstall": "npm run gt"
+    "start": "next start"
   },
   "dependencies": {
     "antd": "^4.9.4",
@@ -28,8 +26,10 @@
     "@emeks/antd-custom-theme-generator": "^0.1.6",
     "@types/node": "^14.14.16",
     "@types/react": "^17.0.0",
+    "chokidar": "^3.4.3",
     "eslint": "^7.16.0",
-    "less": "^4.0.0",
+    "less": "3.11.3",
+    "rimraf": "^3.0.2",
     "sass": "^1.30.0",
     "typescript": "^4.1.3"
   }
