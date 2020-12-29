@@ -7,6 +7,7 @@
 ```js
 // 安装依赖
 yarn
+
 // 运行
 yarn dev
 // 打包
@@ -14,8 +15,21 @@ yarn build
 // 部署，启动node服务， 建议通过pm2启动
 yarn start
 
+// 安装pm2
+npm i pm2 -g
+yarn pm2:start
+
 // 打开网页http://localhost:3000/
 ```
+
+## npm 命令
+
+- dev 开发启动项目
+- build 打包
+- start 启动部署打包的代码
+- pm2:start 以pm2的方式部署代码
+- pm2:reload 重新以pm2的方式部署
+- pm2:delete 删除pm2的进程
 
 ## 目录结构
 
