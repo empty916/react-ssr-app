@@ -1,5 +1,3 @@
 import { createHttp } from "@/http";
 
-export type Ctx = {
-    http: ReturnType<typeof createHttp>;
-}
+export type Http = ReturnType<typeof createHttp>;

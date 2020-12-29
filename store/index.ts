@@ -37,7 +37,7 @@ export const initStore = (data: any = {}) => {
         initStates: data,
         interceptors: [
             isBrowser ? null : () => next => record => {
-                record.actionArgs.push({http});
+                record.actionArgs.push(http);
                 return next(record);
             },
             () => next => record => {

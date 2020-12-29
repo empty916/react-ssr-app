@@ -60,13 +60,13 @@ yarn pm2:start
 
 1. 接口请求使用axios动态生成，代码存放在./http中，在ssr服务端，如果存在用户态，则需要将用户的登录态传给业务后端，所以使用axios动态生成一个实例，再将该实例通过natur interceptor注入到每一个action的最后一个参数，所以接口请求需要获取到action的最后一个参数中的http进行请求
     ```ts
-    import { Ctx } from "@/utils/action-ctx";
+    import { Http } from "@/utils/action-ctx";
 
     const actions = {
-        // ctx会是最后一个参数，必须标记为可选，否则ts会校验必传，实际上他是自动注入的
-        fetch: async (params: string, ctx?: Ctx) => {
-            // ctx.http.post post request
-            // ctx.http.get get request
+        // http会是最后一个参数，必须标记为可选，是natur自动注入的
+        fetch: async (params: string, http?: Http) => {
+            // http.post
+            // http.get
             /* business code */
         }
     }
