@@ -1,8 +1,8 @@
-import { initStore } from "@/store";
-import "@/styles/globals.css";
+import { initStore } from '@/store';
+import '@/styles/globals.css';
 import 'antd/dist/antd.css';
-import "@/services";
-import { isBrowser } from "@/utils";
+import '@/services';
+import { isBrowser } from '@/utils';
 
 
 export default function App({pageProps, Component, store, ...props}) {
@@ -15,6 +15,6 @@ export default function App({pageProps, Component, store, ...props}) {
 }
 
 App.getInitialProps = ({ ctx, pathname }) => {
-	ctx.req.store = initStore(pathname || "/");
+	ctx.req.store = initStore(pathname || '/');
 	return { store: ctx.req.store };
 };

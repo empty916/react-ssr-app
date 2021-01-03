@@ -16,8 +16,8 @@ import { createHttp } from '../http';
 
 
 const modules = {
-    app,
-    page2,
+	app,
+	page2,
 };
 
 export type M = typeof modules;
@@ -26,59 +26,57 @@ export type LM = {};
 
 
 export const initStore = (data: any = {}) => {
-    const http = createHttp();
+	const http = createHttp();
 
-    const {
-        collectPromiseMiddleware,
-        promiseActionsFinishedPromise,
-    } = createPromiseWatcherMiddleware();
+	const {
+		collectPromiseMiddleware,
+		promiseActionsFinishedPromise,
+	} = createPromiseWatcherMiddleware();
 
-    const store = createStore(modules, {}, {
-        initStates: data,
-        interceptors: [
-            isBrowser ? null : () => next => record => {
-                record.actionArgs.push(http);
-                return next(record);
-            },
-            () => next => record => {
-                try {
-                    return next(record);
-                } catch (error) {
-                    console.log(record.moduleName, record.actionName, error);
-                }
-            }
-        ].filter(Boolean),
-        middlewares: [
-            thunkMiddleware,
-            () => next => record => {
-                const res = next(record);
-                if (isPromise(record.state)) {
-                    return res.then(data => {
-                        return promiseActionsFinishedPromise()
-                            .then(() => data);
-                    }).catch(error => {
-                        console.log(record.moduleName, record.actionName, error);
-                        throw error;
-                    })
-                }
-                return res;
-            },
-            isBrowser ? null : collectPromiseMiddleware,
-            promiseMiddleware,
-            fillObjectRestDataMiddleware,
-            shallowEqualMiddleware,
-            filterUndefinedMiddleware,
-            isBrowser ? localStorageMiddleware : null,
-            () => next => record => {
-                console.log(record.moduleName, record.actionName, record.state);
-                return next(record);
-            }
-        ].filter(Boolean),
-    });
-    
-    const serviceInsArr = isBrowser ? [] : services.map(s => new s(store));
+	const store = createStore(modules, {}, {
+		initStates: data,
+		interceptors: [
+			isBrowser ? null : () => next => record => {
+				record.actionArgs.push(http);
+				return next(record);
+			},
+			() => next => record => {
+				try {
+					return next(record);
+				} catch (error) {
+					console.log(record.moduleName, record.actionName, error);
+				}
+			},
+		].filter(Boolean),
+		middlewares: [
+			thunkMiddleware,
+			() => next => record => {
+				const res = next(record);
+				if (isPromise(record.state)) {
+					return res.then(data => promiseActionsFinishedPromise()
+						.then(() => data)).catch(error => {
+						console.log(record.moduleName, record.actionName, error);
+						throw error;
+					});
+				}
+				return res;
+			},
+			isBrowser ? null : collectPromiseMiddleware,
+			promiseMiddleware,
+			fillObjectRestDataMiddleware,
+			shallowEqualMiddleware,
+			filterUndefinedMiddleware,
+			isBrowser ? localStorageMiddleware : null,
+			() => next => record => {
+				console.log(record.moduleName, record.actionName, record.state);
+				return next(record);
+			},
+		].filter(Boolean),
+	});
 
-    return store;
+	const serviceInsArr = isBrowser ? [] : services.map(s => new s(store));
+
+	return store;
 };
 
 
@@ -89,8 +87,8 @@ const initServerData = (global as any)?.__NEXT_DATA__?.props?.pageProps || {};
 const lsData = isBrowser ? (getData() || {}) : {};
 
 const store = initStore({
-    ...lsData,
-    ...initServerData,
+	...lsData,
+	...initServerData,
 });
 export type S = Store<M, LM>;
 (global as any).store = store;

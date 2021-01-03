@@ -4,8 +4,8 @@ import axios from 'axios';
 
 
 export const createHttp = () => axios.create({
-    timeout: 30000,
-    baseURL: '',
+	timeout: 30000,
+	baseURL: '',
 });
 
 
